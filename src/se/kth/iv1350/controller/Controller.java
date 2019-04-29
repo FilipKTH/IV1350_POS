@@ -37,9 +37,9 @@ public class Controller {
      * Searches for PurchaseItemDTO in inventory database
      * @return scannedItem The found PurchaseItemDTO in the database
      */
-	public PurchaseItemDTO scanItem() {
-		PurchaseItemDTO scannedItem = ItemIdentifier.scanItem("193993"); //Temporary barcode
-		purchase.addItemToPurchase(scannedItem,1); //Temporary quantity
+	public PurchaseItemDTO scanItem(String id, int quantity) {
+		PurchaseItemDTO scannedItem = ItemIdentifier.scanItem(id);
+		purchase.addItemToPurchase(scannedItem,quantity);
 		return scannedItem;
 	}
 
