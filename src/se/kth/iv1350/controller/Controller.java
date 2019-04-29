@@ -34,8 +34,11 @@ public class Controller {
 	}
 
     /***
-     * Searches for PurchaseItemDTO in inventory database
-     * @return scannedItem The found PurchaseItemDTO in the database
+     * Searches inventory database for item based on the id
+     * and adds it to the purchase.
+     * @param id Used to identify item to purchase
+     * @param quantity Specifies the quantity of items to purchase
+     * @return Returns matching object from database
      */
 	public PurchaseItemDTO scanItem(String id, int quantity) {
 		PurchaseItemDTO scannedItem = ItemIdentifier.scanItem(id);
