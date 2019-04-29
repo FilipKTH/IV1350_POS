@@ -33,6 +33,10 @@ public class Controller {
 		purchase = new Purchase(cashRegister);
 	}
 
+    /***
+     * Searches for PurchaseItemDTO in inventory database
+     * @return scannedItem The found PurchaseItemDTO in the database
+     */
 	public PurchaseItemDTO scanItem() {
 		PurchaseItemDTO scannedItem = ItemIdentifier.scanItem("193993"); //Temporary barcode
 		purchase.addItemToPurchase(scannedItem,1); //Temporary quantity
