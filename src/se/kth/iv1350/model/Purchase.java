@@ -9,12 +9,15 @@ import java.util.List;
 
 public class Purchase {
 	private List<PurchaseItemDTO> listOfItemsToPurchase = new ArrayList<>();
+	private CashRegister cashRegister;
 
 	private double runningTotal;
 	private double totalVAT;
 
 	public Purchase(CashRegister cashRegister) {
-
+        this.cashRegister = cashRegister;
+        this.runningTotal = 0;
+        this.totalVAT = 0;
 	}
 
 	/***
@@ -32,8 +35,14 @@ public class Purchase {
 		return null;
 	}
 
+    /***
+     * Used to pay for the purchase
+     * @param amount The amount the customer is paying
+     * @return Returns the change of the purchase
+     */
 	public double pay(double amount) {
-		return 0;
+	    cashRegister.addMoney(amount);
+		return cashRegister.getChange(amount, runningTotal);
 	}
 
 	public PurchaseDTO getPurchaseDTO() {

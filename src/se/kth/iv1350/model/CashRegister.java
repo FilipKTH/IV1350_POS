@@ -2,18 +2,28 @@ package se.kth.iv1350.model;
 
 public class CashRegister {
 
-	private int balance;
+	private double balance;
 
 	public CashRegister(double balance) {
-
+		this.balance = balance;
 	}
 
-	public void addMoney(double runningTotal) {
-
+	/***
+	 * Adds money to the balance of the cash register.
+	 * @param amountToAdd Money to add to the balance
+	 */
+	public void addMoney(double amountToAdd) {
+		balance += amountToAdd;
 	}
 
-	public void getChange(double amount, double runningTotal) {
-
+	/***
+	 * Calculate amount of change based on money payed and cost.
+	 * @param amount Amount of money being payed
+	 * @param runningTotal Cost of what is being purchased
+	 * @return Returns the change
+	 */
+	public double getChange(double amount, double runningTotal) {
+		return amount - runningTotal;
 	}
 
 }

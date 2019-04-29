@@ -56,8 +56,13 @@ public class Controller {
 		return purchase.findDiscounts(customerID);
 	}
 
+    /***
+     * Used to pay for the purchase
+     * @param amount The amount the customer is paying
+     * @return Returns the change of the purchase
+     */
 	public double pay(double amount) {
-		return 0;
+		return purchase.pay(amount);
 	}
 
 }
