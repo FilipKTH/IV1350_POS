@@ -3,7 +3,11 @@ package se.kth.iv1350.model;
 import se.kth.iv1350.integration.PurchaseItemDTO;
 import se.kth.iv1350.integration.DiscountDTO;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Purchase {
+	private List<PurchaseItemDTO> listOfItemsToPurchase = new ArrayList<>();
 
 	private double runningTotal;
 	private double totalVAT;
@@ -12,8 +16,15 @@ public class Purchase {
 
 	}
 
+	/***
+	 * Adds items to the list of items to purchase.
+	 * @param itemDTO Item to add to the list of items to purchase.
+	 * @param quantity The amount of itemDTO to purchase.
+	 */
 	public void addItemToPurchase(PurchaseItemDTO itemDTO, int quantity) {
-
+		for (int i = 0; i < quantity; i++){
+			listOfItemsToPurchase.add(itemDTO);
+		}
 	}
 
 	public PurchaseItemDTO[] getItemsToPurchase() {
