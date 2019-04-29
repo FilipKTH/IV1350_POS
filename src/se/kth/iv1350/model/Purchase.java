@@ -1,5 +1,6 @@
 package se.kth.iv1350.model;
 
+import se.kth.iv1350.integration.DiscountGenerator;
 import se.kth.iv1350.integration.PurchaseItemDTO;
 import se.kth.iv1350.integration.DiscountDTO;
 
@@ -39,8 +40,18 @@ public class Purchase {
 		return null;
 	}
 
+    /***
+     * Uses discount database to find available discounts and
+     * applies them to the purchase.
+     * @param customerID Discounts are based on the customer
+     *                   customerID i used to identify.
+     * @return Returns updated purchase
+     */
 	public PurchaseDTO findDiscounts(String customerID) {
-		return null;
+	    DiscountDTO[] availableDiscounts = DiscountGenerator.getDiscounts(customerID,
+                listOfItemsToPurchase);
+	    applyDiscounts(availableDiscounts);
+		return getPurchaseDTO();
 	}
 
 	private void applyDiscounts(DiscountDTO[] discounts) {

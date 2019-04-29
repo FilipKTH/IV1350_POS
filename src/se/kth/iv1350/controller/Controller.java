@@ -46,8 +46,14 @@ public class Controller {
 		return scannedItem;
 	}
 
+	/***
+	 * Searches for available discounts and applies them to the purchase.
+	 * @param customerID Used to search database for available discounts
+	 *                   based on the customer's id
+	 * @return Returns the updated purchase.
+	 */
 	public PurchaseDTO applyAvailableDiscounts(String customerID) {
-		return null;
+		return purchase.findDiscounts(customerID);
 	}
 
 	public double pay(double amount) {
