@@ -15,13 +15,6 @@ public class Controller {
 	private Purchase purchase;
 	private CashRegister cashRegister;
 
-	/***
-	 * Starts the process of a new purchase by creating
-	 * an instance of Purchase.
-	 */
-	public void startNewAPurchase() {
-		purchase = new Purchase(cashRegister);
-	}
 
 	/***
 	 * Creates a new instance and initializes cashRegister.
@@ -29,6 +22,14 @@ public class Controller {
 	public Controller()
 	{
 		cashRegister = new CashRegister(200); //Placeholder value of balance
+	}
+	
+	/***
+	 * Starts the process of a new purchase by creating
+	 * an instance of Purchase.
+	 */
+	public void startNewAPurchase() {
+		purchase = new Purchase(cashRegister);
 	}
 
 	public PurchaseItemDTO scanItem() {
