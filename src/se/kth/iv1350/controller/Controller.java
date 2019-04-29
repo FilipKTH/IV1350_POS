@@ -3,6 +3,7 @@ package se.kth.iv1350.controller;
 import se.kth.iv1350.model.Purchase;
 import se.kth.iv1350.model.CashRegister;
 import se.kth.iv1350.integration.PurchaseItemDTO;
+import se.kth.iv1350.integration.ItemIdentifier;
 import se.kth.iv1350.model.PurchaseDTO;
 
 /**
@@ -33,7 +34,9 @@ public class Controller {
 	}
 
 	public PurchaseItemDTO scanItem() {
-		return null;
+		PurchaseItemDTO scannedItem = ItemIdentifier.scanItem("193993"); //Temporary barcode
+		purchase.addItemToPurchase(scannedItem,1); //Temporary quantity
+		return scannedItem;
 	}
 
 	public PurchaseDTO applyAvailableDiscounts(String customerID) {
