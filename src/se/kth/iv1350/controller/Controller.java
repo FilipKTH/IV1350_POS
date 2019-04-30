@@ -22,7 +22,8 @@ public class Controller {
 	 */
 	public Controller()
 	{
-		cashRegister = new CashRegister(200); //Placeholder value of balance
+		cashRegister = new CashRegister(200); // Placeholder value of balance
+		purchase = new Purchase(cashRegister);
 	}
 	
 	/***
@@ -40,10 +41,11 @@ public class Controller {
      * @param quantity Specifies the quantity of items to purchase
      * @return Returns matching object from database
      */
-	public PurchaseItemDTO scanItem(String id, int quantity) throws Exception {
-		PurchaseItemDTO scannedItem = ItemIdentifier.scanItem(id);
-		purchase.addItemToPurchase(scannedItem,quantity);
-		return scannedItem;
+	public PurchaseItemDTO scanItem(String id, int quantity) throws Exception{
+			PurchaseItemDTO scannedItem = ItemIdentifier.scanItem(id);
+			scannedItem.setAmount(quantity);
+			purchase.addItemToPurchase(scannedItem);
+			return scannedItem;
 	}
 
 	/***

@@ -34,21 +34,17 @@ public class Purchase {
 	/***
 	 * Adds items to the list of items to purchase.
 	 * @param purchaseItemDTO Item to add to the list of items to purchase.
-	 * @param quantity The amount of purchaseItemDTO to purchase.
 	 */
-	public void addItemToPurchase(PurchaseItemDTO purchaseItemDTO, int quantity) throws Exception{
+	public void addItemToPurchase(PurchaseItemDTO purchaseItemDTO) throws Exception{
 		if (purchaseItemDTO == null)
 			throw new Exception("No item to add. purchaseItemDTO is null");
-		if (quantity < 1)
-			throw new Exception("Invalid quantity was entered. Quantity entered: " + quantity);
 
 		PurchaseItemDTO alreadyExistingItem =
 				findAndReturnPurchaseItemDTOFromPurchaseList(purchaseItemDTO.getItemID());
 
 		if(alreadyExistingItem != null)
-			alreadyExistingItem.setAmount(alreadyExistingItem.getAmount() + quantity);
+			alreadyExistingItem.setAmount(alreadyExistingItem.getAmount() + purchaseItemDTO.getAmount());
 		else {
-			purchaseItemDTO.setAmount(quantity);
 			listOfItemsToPurchase.add(purchaseItemDTO);
 		}
 	}
