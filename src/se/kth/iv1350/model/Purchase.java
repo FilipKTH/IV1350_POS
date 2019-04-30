@@ -22,12 +22,12 @@ public class Purchase {
 
 	/***
 	 * Adds items to the list of items to purchase.
-	 * @param itemDTO Item to add to the list of items to purchase.
-	 * @param quantity The amount of itemDTO to purchase.
+	 * @param purchaseItemDTO Item to add to the list of items to purchase.
+	 * @param quantity The amount of purchaseItemDTO to purchase.
 	 */
-	public void addItemToPurchase(PurchaseItemDTO itemDTO, int quantity) {
+	public void addItemToPurchase(PurchaseItemDTO purchaseItemDTO, int quantity) {
 		for (int i = 0; i < quantity; i++){
-			listOfItemsToPurchase.add(itemDTO);
+			listOfItemsToPurchase.add(purchaseItemDTO);
 		}
 	}
 
@@ -44,6 +44,7 @@ public class Purchase {
 	    cashRegister.addMoney(amount);
 		createAndPrintReceipt();
 		updateEAS();
+		updateInventory();
 		return cashRegister.getChange(amount, runningTotal);
 	}
 
@@ -79,8 +80,8 @@ public class Purchase {
 		EAScontrols.logPurchase(getPurchaseDTO());
 	}
 
-	private void updateInventory(PurchaseItemDTO[] itemDTOs) {
-
+	private void updateInventory() {
+		InventoryControls.updateInventory(listOfItemsToPurchase);
 	}
 
 }

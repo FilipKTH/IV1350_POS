@@ -1,6 +1,6 @@
 package se.kth.iv1350.model;
 
-import POSsys.integration.PurchaseItemDTO;
+import se.kth.iv1350.integration.PurchaseItemDTO;
 
 public class PurchaseDTO {
 
@@ -8,8 +8,8 @@ public class PurchaseDTO {
 
 	private double totalVAT;
 
-	public PurchaseDTO purchaseDTO(double runningTotal, double totalVat, PurchaseItemDTO[] itemDTOs) {
-		return null;
+	public PurchaseDTO(double runningTotal, double totalVat, PurchaseItemDTO[] itemDTOs) {
+
 	}
 
 	public double getRunningTotal() {
