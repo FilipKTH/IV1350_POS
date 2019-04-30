@@ -49,7 +49,7 @@ class PurchaseTest {
                     "adding a null-pointer...");
         }
         catch (Exception e){
-            assertNull(e,"addItemToPurchase didn't throw an exception");
+            assertTrue(e != null,"addItemToPurchase didn't throw an exception");
             assertTrue(e.getMessage().contains("null"), "Wrong exception was triggered.");
         }
     }
