@@ -64,15 +64,29 @@ class ControllerTest {
         }
     }
 
+    @Test
     void scanningNonExistingItemID(){
         try{
             PurchaseItemDTO result = instance.scanItem("wild cowboy", 2);
             fail("Due to the item being null an exception should have ben thrown");
         }
         catch (Exception e){
-            assertTrue(e.getMessage().contains("null"),"Wrong exception tossed");
+            assertTrue(e.getMessage().contains("ID"),"Wrong exception tossed," +
+                    " tossed exception: " + e.getMessage());
         }
     }
+
+    @Test
+    void scanningItemWithInvalidQuantity(){
+        try{
+            PurchaseItemDTO result = instance.scanItem("apple", -2);
+            fail("Due to the quantity being invalid an exception should have ben thrown");
+        }
+        catch (Exception e){
+            assertTrue(e.getMessage().contains("quantity"),"Wrong exception tossed");
+        }
+    }
+
     /*@Test
     void pay() {
     }*/

@@ -35,17 +35,20 @@ public class Purchase {
 	 * Adds items to the list of items to purchase.
 	 * @param purchaseItemDTO Item to add to the list of items to purchase.
 	 */
-	public void addItemToPurchase(PurchaseItemDTO purchaseItemDTO) throws Exception{
+	public PurchaseItemDTO addItemToPurchase(PurchaseItemDTO purchaseItemDTO) throws Exception{
 		if (purchaseItemDTO == null)
 			throw new Exception("No item to add. purchaseItemDTO is null");
 
 		PurchaseItemDTO alreadyExistingItem =
 				findAndReturnPurchaseItemDTOFromPurchaseList(purchaseItemDTO.getItemID());
 
-		if(alreadyExistingItem != null)
-			alreadyExistingItem.setAmount(alreadyExistingItem.getAmount() + purchaseItemDTO.getAmount());
+		if(alreadyExistingItem != null) {
+            alreadyExistingItem.setAmount(alreadyExistingItem.getAmount() + purchaseItemDTO.getAmount());
+            return alreadyExistingItem;
+        }
 		else {
 			listOfItemsToPurchase.add(purchaseItemDTO);
+			return purchaseItemDTO;
 		}
 	}
 
