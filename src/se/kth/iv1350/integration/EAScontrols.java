@@ -2,6 +2,11 @@ package se.kth.iv1350.integration;
 
 import se.kth.iv1350.model.PurchaseDTO;
 
+/**
+ * Used for communication with the external accounting
+ * system
+ * @author Filip
+ */
 public class EAScontrols {
 	/***
 	 * Updates the external accounting system

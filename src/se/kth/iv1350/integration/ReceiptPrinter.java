@@ -2,6 +2,10 @@ package se.kth.iv1350.integration;
 
 import se.kth.iv1350.model.Recipt;
 
+/**
+ * Controls all actions between connected printer and
+ * the program.
+ */
 public class ReceiptPrinter {
 
 	/***

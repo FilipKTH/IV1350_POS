@@ -1,5 +1,9 @@
 package se.kth.iv1350.integration;
 
+/**
+ * Used for communication with the item database
+ * @author Filip
+ */
 public class ItemIdentifier {
 
 	/***

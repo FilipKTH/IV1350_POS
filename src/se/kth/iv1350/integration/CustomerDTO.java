@@ -1,5 +1,9 @@
 package se.kth.iv1350.integration;
 
+/**
+ * Contains only data about a customer.
+ * @author Filip
+ */
 public class CustomerDTO {
 
 	CustomerDTO customerDTO(String name, double moneySpent, int mebershipLength) {

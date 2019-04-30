@@ -1,6 +1,11 @@
 package se.kth.iv1350.integration;
 import java.util.List;
 
+/**
+ * Used to generate discounts based on the customer
+ * and said customers list of items to purchase
+ * @author Filip
+ */
 public class DiscountGenerator {
 
 	/***

@@ -3,6 +3,10 @@ package se.kth.iv1350.integration;
 
 import java.util.List;
 
+/**
+ * Used for communication with the inventory database
+ * @author Filip
+ */
 public class InventoryControls {
 
 	/***
