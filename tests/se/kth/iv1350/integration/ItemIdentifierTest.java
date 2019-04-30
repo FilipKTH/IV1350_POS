@@ -8,14 +8,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ItemIdentifierTest {
 
-    @BeforeEach
-    void setUp() {
-    }
-
-    @AfterEach
-    void tearDown() {
-    }
-
     @Test
     void scanItem() {
         /*
@@ -24,6 +16,7 @@ class ItemIdentifierTest {
             2: itemID that doesn't exists in database
             3: String = null
          */
+
         //Test 1
         String result1 = ItemIdentifier.scanItem("apple").getItemID();
         String expResult1 = "apple";
@@ -35,7 +28,7 @@ class ItemIdentifierTest {
         PurchaseItemDTO result3 = ItemIdentifier.scanItem(null);
 
         //Result of test 1
-        assertTrue(result1.equals(expResult1),
+        assertEquals(result1.equals(expResult1),
                 "scanItem() wasn't able to fetch the correct item.");
 
         //Result of test 2

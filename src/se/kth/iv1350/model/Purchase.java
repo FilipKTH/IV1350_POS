@@ -37,14 +37,20 @@ public class Purchase {
 	 * @param quantity The amount of purchaseItemDTO to purchase.
 	 */
 	public void addItemToPurchase(PurchaseItemDTO purchaseItemDTO, int quantity) throws Exception{
+		if (purchaseItemDTO == null)
+			throw new Exception("No item to add. purchaseItemDTO is null");
+		if (quantity < 1)
+			throw new Exception("Invalid quantity was entered. Quantity entered: " + quantity);
+
 		PurchaseItemDTO alreadyExistingItem =
 				findAndReturnPurchaseItemDTOFromPurchaseList(purchaseItemDTO.getItemID());
 
 		if(alreadyExistingItem != null)
 			alreadyExistingItem.setAmount(alreadyExistingItem.getAmount() + quantity);
-
-		purchaseItemDTO.setAmount(quantity);
-		listOfItemsToPurchase.add(purchaseItemDTO);
+		else {
+			purchaseItemDTO.setAmount(quantity);
+			listOfItemsToPurchase.add(purchaseItemDTO);
+		}
 	}
 
 	/***
@@ -52,7 +58,8 @@ public class Purchase {
 	 * @return Array containing items to purchase
 	 */
 	public PurchaseItemDTO[] getItemsToPurchase() {
-		return null;
+		PurchaseItemDTO[] arrayOfItemsToPurchase = new PurchaseItemDTO[listOfItemsToPurchase.size()];
+		return arrayOfItemsToPurchase = listOfItemsToPurchase.toArray(arrayOfItemsToPurchase);
 	}
 
     /***
@@ -91,7 +98,8 @@ public class Purchase {
 	}
 
 	private void applyDiscounts(DiscountDTO[] discounts) {
-
+		for (int i = 0; i < discounts.length; i++)
+			runningTotal -= discounts[i].getDiscountInMoney();
 	}
 
 	private void createAndPrintReceipt() {
@@ -108,7 +116,7 @@ public class Purchase {
 		InventoryControls.updateInventory(listOfItemsToPurchase);
 	}
 
-	PurchaseItemDTO findAndReturnPurchaseItemDTOFromPurchaseList(String itemID){
+	private PurchaseItemDTO findAndReturnPurchaseItemDTOFromPurchaseList(String itemID){
 		for (int i = 0; i < listOfItemsToPurchase.size(); i++)
 			if (listOfItemsToPurchase.get(i).getItemID().equals(itemID))
 				return listOfItemsToPurchase.get(i);
