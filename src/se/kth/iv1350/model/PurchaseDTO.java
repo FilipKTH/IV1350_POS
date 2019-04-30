@@ -2,24 +2,40 @@ package se.kth.iv1350.model;
 
 import se.kth.iv1350.integration.PurchaseItemDTO;
 
+/**
+ * Contains only data of a Purchase
+ * @author Filip
+ */
 public class PurchaseDTO {
 
 	private double runningTotal;
 
 	private double totalVAT;
 
-	public PurchaseDTO(double runningTotal, double totalVat, PurchaseItemDTO[] itemDTOs) {
+	PurchaseDTO(double runningTotal, double totalVat, PurchaseItemDTO[] itemDTOs) {
 
 	}
 
+	/***
+	 *
+	 * @return Returns running total of the purchase
+	 */
 	public double getRunningTotal() {
-		return 0;
+		return this.runningTotal;
 	}
 
+	/***
+	 *
+	 * @return Returns the total VAT of the purchase
+	 */
 	public double getTotalVAT() {
-		return 0;
+		return this.totalVAT;
 	}
 
+	/***
+	 *
+	 * @return Returns information of all items to purchase
+	 */
 	public PurchaseItemDTO[] getItemDTOs() {
 		return null;
 	}

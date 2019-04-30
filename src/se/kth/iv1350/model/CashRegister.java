@@ -1,5 +1,9 @@
 package se.kth.iv1350.model;
 
+/**
+ * Used to control money actions of a purchase
+ * @author Filip
+ */
 public class CashRegister {
 
 	private double balance;

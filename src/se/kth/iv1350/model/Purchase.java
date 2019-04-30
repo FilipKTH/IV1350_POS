@@ -7,6 +7,12 @@ import se.kth.iv1350.model.Recipt;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Controls the event of a purchase. Meaning, tracking
+ * items to purchase, paying for items and updating external
+ * systems connected to the purchase.
+ * @author Filip
+ */
 public class Purchase {
 	private List<PurchaseItemDTO> listOfItemsToPurchase = new ArrayList<>();
 	private CashRegister cashRegister;
@@ -14,6 +20,11 @@ public class Purchase {
 	private double runningTotal;
 	private double totalVAT;
 
+	/***
+	 * Creates instance of Purchase
+	 * @param cashRegister Keeps track of money in a Purchase
+	 *                     and handles payments.
+	 */
 	public Purchase(CashRegister cashRegister) {
         this.cashRegister = cashRegister;
         this.runningTotal = 0;
@@ -25,7 +36,7 @@ public class Purchase {
 	 * @param purchaseItemDTO Item to add to the list of items to purchase.
 	 * @param quantity The amount of purchaseItemDTO to purchase.
 	 */
-	public void addItemToPurchase(PurchaseItemDTO purchaseItemDTO, int quantity) {
+	public void addItemToPurchase(PurchaseItemDTO purchaseItemDTO, int quantity) throws Exception{
 		PurchaseItemDTO alreadyExistingItem =
 				findAndReturnPurchaseItemDTOFromPurchaseList(purchaseItemDTO.getItemID());
 
@@ -36,6 +47,10 @@ public class Purchase {
 		listOfItemsToPurchase.add(purchaseItemDTO);
 	}
 
+	/***
+	 * Converts the List of items to purchase to an array
+	 * @return Array containing items to purchase
+	 */
 	public PurchaseItemDTO[] getItemsToPurchase() {
 		return null;
 	}
@@ -53,6 +68,10 @@ public class Purchase {
 		return cashRegister.getChange(amount, runningTotal);
 	}
 
+	/***
+	 * Converts this object to a PurchaseDTO
+	 * @return Returns this object
+	 */
 	public PurchaseDTO getPurchaseDTO() {
 		return null;
 	}
