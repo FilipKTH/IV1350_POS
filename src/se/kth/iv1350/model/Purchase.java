@@ -26,9 +26,14 @@ public class Purchase {
 	 * @param quantity The amount of purchaseItemDTO to purchase.
 	 */
 	public void addItemToPurchase(PurchaseItemDTO purchaseItemDTO, int quantity) {
-		for (int i = 0; i < quantity; i++){
-			listOfItemsToPurchase.add(purchaseItemDTO);
-		}
+		PurchaseItemDTO alreadyExistingItem =
+				findAndReturnPurchaseItemDTOFromPurchaseList(purchaseItemDTO.getItemID());
+
+		if(alreadyExistingItem != null)
+			alreadyExistingItem.setAmount(alreadyExistingItem.getAmount() + quantity);
+
+		purchaseItemDTO.setAmount(quantity);
+		listOfItemsToPurchase.add(purchaseItemDTO);
 	}
 
 	public PurchaseItemDTO[] getItemsToPurchase() {
@@ -84,4 +89,10 @@ public class Purchase {
 		InventoryControls.updateInventory(listOfItemsToPurchase);
 	}
 
+	PurchaseItemDTO findAndReturnPurchaseItemDTOFromPurchaseList(String itemID){
+		for (int i = 0; i < listOfItemsToPurchase.size(); i++)
+			if (listOfItemsToPurchase.get(i).getItemID().equals(itemID))
+				return listOfItemsToPurchase.get(i);
+		return null;
+	}
 }

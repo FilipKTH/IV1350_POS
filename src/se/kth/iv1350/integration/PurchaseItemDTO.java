@@ -18,6 +18,10 @@ public class PurchaseItemDTO {
 		this.itemDescription = itemDescription;
 	}
 
+	public void setAmount(int amount){
+		this.amount = amount;
+	}
+
 	public double getPrice() {
 		return price;
 	}
