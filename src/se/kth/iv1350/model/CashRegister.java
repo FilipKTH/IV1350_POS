@@ -4,6 +4,11 @@ public class CashRegister {
 
 	private double balance;
 
+	/***
+	 * Creates instance of CashRegister
+	 * @param balance Sets amount of money contained in
+	 *                the CashRegister.
+	 */
 	public CashRegister(double balance) {
 		this.balance = balance;
 	}

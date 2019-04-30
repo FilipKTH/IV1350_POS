@@ -1,8 +1,8 @@
 package se.kth.iv1350.model;
 
-import se.kth.iv1350.integration.DiscountGenerator;
-import se.kth.iv1350.integration.PurchaseItemDTO;
-import se.kth.iv1350.integration.DiscountDTO;
+import se.kth.iv1350.integration.*;
+
+import se.kth.iv1350.model.Recipt;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +42,8 @@ public class Purchase {
      */
 	public double pay(double amount) {
 	    cashRegister.addMoney(amount);
+		createAndPrintReceipt();
+		updateEAS();
 		return cashRegister.getChange(amount, runningTotal);
 	}
 
@@ -67,12 +69,14 @@ public class Purchase {
 
 	}
 
-	private void printReceipt(PurchaseDTO purchaseDTO) {
+	private void createAndPrintReceipt() {
+		Recipt recipt = new Recipt(getPurchaseDTO());
+		ReceiptPrinter.printReceipt(recipt);
 
 	}
 
-	private void updateEAS(PurchaseDTO purchaseDTO) {
-
+	private void updateEAS() {
+		EAScontrols.logPurchase(getPurchaseDTO());
 	}
 
 	private void updateInventory(PurchaseItemDTO[] itemDTOs) {
