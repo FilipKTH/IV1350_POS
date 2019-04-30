@@ -15,6 +15,8 @@ public class ItemIdentifier {
 	 * @return Returns the matching item from the database
 	 */
 	public static PurchaseItemDTO scanItem(String itemID) {
+		if (itemID == null)
+			return null;
 		createItemsForDatabase();
 		return returnItemFromDatabase(itemID);
 	}
