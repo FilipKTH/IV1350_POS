@@ -19,6 +19,7 @@ public class Main {
 
 		controller = new Controller();
 		view = new View(controller);
+		view.run();
 	}
 
 }

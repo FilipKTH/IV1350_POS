@@ -40,7 +40,7 @@ public class Controller {
      * @param quantity Specifies the quantity of items to purchase
      * @return Returns matching object from database
      */
-	public PurchaseItemDTO scanItem(String id, int quantity) {
+	public PurchaseItemDTO scanItem(String id, int quantity) throws Exception {
 		PurchaseItemDTO scannedItem = ItemIdentifier.scanItem(id);
 		purchase.addItemToPurchase(scannedItem,quantity);
 		return scannedItem;

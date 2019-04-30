@@ -19,5 +19,8 @@ public class View {
     public View(Controller cntrl) {
         this.cntrl = cntrl;
     }
+    public void run(){
+        System.out.println("Init working...");
+    }
 
 }
