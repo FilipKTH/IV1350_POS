@@ -2,6 +2,8 @@ package se.kth.iv1350.model;
 
 import se.kth.iv1350.integration.PurchaseItemDTO;
 
+import java.util.List;
+
 /**
  * Contains only data of a Purchase
  * @author Filip
@@ -12,7 +14,7 @@ public class PurchaseDTO {
 
 	private double totalVAT;
 
-	PurchaseDTO(double runningTotal, double totalVat, PurchaseItemDTO[] itemDTOs) {
+	PurchaseDTO(double runningTotal, double totalVat, List<PurchaseItemDTO> itemDTOs) {
 
 	}
 

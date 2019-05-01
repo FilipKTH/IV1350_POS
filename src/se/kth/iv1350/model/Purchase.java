@@ -58,9 +58,9 @@ public class Purchase {
 	 * Converts the List of items to purchase to an array
 	 * @return Array containing items to purchase
 	 */
-	public PurchaseItemDTO[] getItemsToPurchase() {
+	PurchaseItemDTO[] getItemsToPurchase() {
 		PurchaseItemDTO[] arrayOfItemsToPurchase = new PurchaseItemDTO[listOfItemsToPurchase.size()];
-		return arrayOfItemsToPurchase = listOfItemsToPurchase.toArray(arrayOfItemsToPurchase);
+		return listOfItemsToPurchase.toArray(arrayOfItemsToPurchase);
 	}
 
     /***
@@ -81,8 +81,8 @@ public class Purchase {
 	 * Converts this object to a PurchaseDTO
 	 * @return Returns this object
 	 */
-	public PurchaseDTO getPurchaseDTO() {
-		return null;
+	private PurchaseDTO getPurchaseDTO() {
+		return new PurchaseDTO(runningTotal,totalVAT, listOfItemsToPurchase);
 	}
 
     /***
@@ -100,8 +100,7 @@ public class Purchase {
 	}
 
 	private void applyDiscounts(DiscountDTO[] discounts) {
-		for (int i = 0; i < discounts.length; i++)
-			runningTotal -= discounts[i].getDiscountInMoney();
+		for (DiscountDTO discount : discounts) runningTotal -= discount.getDiscountInMoney();
 	}
 
 	private void createAndPrintReceipt() {
@@ -119,9 +118,9 @@ public class Purchase {
 	}
 
 	private PurchaseItemDTO findAndReturnPurchaseItemDTOFromPurchaseList(String itemID){
-		for (int i = 0; i < listOfItemsToPurchase.size(); i++)
-			if (listOfItemsToPurchase.get(i).getItemID().equals(itemID))
-				return listOfItemsToPurchase.get(i);
+		for (PurchaseItemDTO purchaseItemDTO : listOfItemsToPurchase)
+			if (purchaseItemDTO.getItemID().equals(itemID))
+				return purchaseItemDTO;
 		return null;
 	}
 
