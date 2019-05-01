@@ -67,11 +67,12 @@ public class Purchase {
      * @return Returns the change of the purchase
      */
 	public double pay(double amount) throws Exception{
-	    cashRegister.addMoney(amount);
+		double change = cashRegister.payAndReturnChange(amount, runningTotal);
+
 		createAndPrintReceipt();
 		updateEAS();
 		updateInventory();
-		return cashRegister.getChange(amount, runningTotal);
+		return change;
 	}
 
 	/***

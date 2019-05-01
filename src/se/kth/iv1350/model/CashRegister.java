@@ -37,9 +37,30 @@ public class CashRegister {
 		if(amount < runningTotal){
 			throw new Exception("Tried to pay less than cost.");
 		}
-		else if((amount - runningTotal) > balance){
+		else if((amount - runningTotal) > (balance + amount)){
 			throw new Exception("Not enough money in register to give change.");
 		}
+
+		double change = amount - runningTotal;
+		balance -= change;
+
+		return change;
+	}
+
+	/***
+	 * Adds money to register and returns the change
+	 * @param amount Amount of money being payed
+	 * @param runningTotal Cost of what is being purchased
+	 * @return Returns the change
+	 */
+	public double payAndReturnChange(double amount, double runningTotal) throws Exception{
+		if(amount < runningTotal){
+			throw new Exception("Tried to pay less than cost.");
+		}
+		else if((amount - runningTotal) > (balance + amount)){
+			throw new Exception("Not enough money in register to give change.");
+		}
+		addMoney(amount);
 
 		double change = amount - runningTotal;
 		balance -= change;
