@@ -13,7 +13,7 @@ public class Main {
 	 * Initializes the program
 	 * @param args The program does not support use of the CMD
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception{
 		View view;
 		Controller controller;
 
