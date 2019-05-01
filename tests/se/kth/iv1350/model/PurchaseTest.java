@@ -3,7 +3,7 @@ package se.kth.iv1350.model;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import se.kth.iv1350.integration.ItemIdentifier;
+import se.kth.iv1350.integration.ItemDatabaseControls;
 import se.kth.iv1350.integration.PurchaseItemDTO;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -24,7 +24,7 @@ class PurchaseTest {
     @Test
     void addingExistingItem() {
         try {
-            purchase.addItemToPurchase(ItemIdentifier.scanItem("apple"));
+            purchase.addItemToPurchase(ItemDatabaseControls.scanItem("apple"));
             assertTrue(purchase.getItemsToPurchase()[0].getItemID().equals("apple"),
                     "Wasn't able to correctly add item");
         }
@@ -50,8 +50,8 @@ class PurchaseTest {
     @Test
     void addingSameItem(){
         try {
-            purchase.addItemToPurchase(ItemIdentifier.scanItem("apple"));
-            purchase.addItemToPurchase(ItemIdentifier.scanItem("apple"));
+            purchase.addItemToPurchase(ItemDatabaseControls.scanItem("apple"));
+            purchase.addItemToPurchase(ItemDatabaseControls.scanItem("apple"));
             assertTrue(purchase.getItemsToPurchase()[0].getAmount() == 2,
                     "Amount wasn't updated as intended");
             assertTrue(purchase.getItemsToPurchase().length == 1,
@@ -67,7 +67,7 @@ class PurchaseTest {
     @Test
     void addingItemWithBiggerQuantity(){
         try {
-            PurchaseItemDTO item = ItemIdentifier.scanItem("apple");
+            PurchaseItemDTO item = ItemDatabaseControls.scanItem("apple");
             item.setAmount(5);
             purchase.addItemToPurchase(item);
             assertTrue(purchase.getItemsToPurchase()[0].getAmount() == 5,
@@ -78,7 +78,49 @@ class PurchaseTest {
                     " adding instantiated PurchaseItemDTO");
         }
     }
-    /*@Test
-    void pay() {
-    }*/
+    @Test
+    void payTooMuch() {
+        try {
+            purchase.addItemToPurchase(ItemDatabaseControls.scanItem("apple"));
+            purchase.addItemToPurchase(ItemDatabaseControls.scanItem("apple"));
+
+            double result = purchase.pay(30);
+            double expResult = 10;
+
+            assertEquals(expResult,result,"Wrong change returned");
+        }
+        catch (Exception e){
+            fail("Exception given: " + e.getMessage());
+        }
+    }
+
+    @Test
+    void payEven() {
+        try {
+            purchase.addItemToPurchase(ItemDatabaseControls.scanItem("apple"));
+            purchase.addItemToPurchase(ItemDatabaseControls.scanItem("apple"));
+
+            double result = purchase.pay(20);
+            double expResult = 0;
+
+            assertEquals(expResult,result,"Wrong change returned");
+        }
+        catch (Exception e){
+            fail("Exception given: " + e.getMessage());
+        }
+    }
+
+    @Test
+    void payTooLittle() {
+        try {
+            purchase.addItemToPurchase(ItemDatabaseControls.scanItem("apple"));
+            purchase.addItemToPurchase(ItemDatabaseControls.scanItem("apple"));
+
+            double result = purchase.pay(10);
+            fail("Exception should have been tossed");
+        }
+        catch (Exception e){
+            assertTrue(e.getMessage().contains("less"), "Wrong  exception: " + e.getMessage());
+        }
+    }
 }

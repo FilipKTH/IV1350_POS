@@ -1,12 +1,10 @@
 package se.kth.iv1350.integration;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ItemIdentifierTest {
+class ItemDatabaseControlsTest {
         /*
             Things to test:
             1: itemID that exists in database
@@ -17,7 +15,7 @@ class ItemIdentifierTest {
     @Test
     void scanExistingItem() {
         //Test 1
-        String result1 = ItemIdentifier.scanItem("apple").getItemID();
+        String result1 = ItemDatabaseControls.scanItem("apple").getItemID();
         String expResult1 = "apple";
 
         //Result of test 1
@@ -28,7 +26,7 @@ class ItemIdentifierTest {
     @Test
     void scanNoneExistingITem(){
         //Test 2
-        PurchaseItemDTO result2 = ItemIdentifier.scanItem("cowboy");
+        PurchaseItemDTO result2 = ItemDatabaseControls.scanItem("cowboy");
         //Result of test 2
         assertNull(result2, "scanItem() wasn't able to handle none existing ID");
     }
@@ -36,7 +34,7 @@ class ItemIdentifierTest {
     @Test
     void scanNullID(){
         //Test 3
-        PurchaseItemDTO result3 = ItemIdentifier.scanItem(null);
+        PurchaseItemDTO result3 = ItemDatabaseControls.scanItem(null);
         //Result of test 3
         assertNull(result3, "scanItem() wasn't able to handle null parameter");
     }

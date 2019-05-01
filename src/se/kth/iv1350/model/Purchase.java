@@ -39,6 +39,8 @@ public class Purchase {
 		if (purchaseItemDTO == null)
 			throw new Exception("No item to add. purchaseItemDTO is null");
 
+		addItemToRunningTotal(purchaseItemDTO);
+
 		PurchaseItemDTO alreadyExistingItem =
 				findAndReturnPurchaseItemDTOFromPurchaseList(purchaseItemDTO.getItemID());
 
@@ -121,5 +123,9 @@ public class Purchase {
 			if (listOfItemsToPurchase.get(i).getItemID().equals(itemID))
 				return listOfItemsToPurchase.get(i);
 		return null;
+	}
+
+	private void addItemToRunningTotal(PurchaseItemDTO purchaseItemDTO){
+		runningTotal += purchaseItemDTO.getPrice() * purchaseItemDTO.getAmount();
 	}
 }

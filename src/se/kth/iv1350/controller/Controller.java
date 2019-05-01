@@ -3,7 +3,7 @@ package se.kth.iv1350.controller;
 import se.kth.iv1350.model.Purchase;
 import se.kth.iv1350.model.CashRegister;
 import se.kth.iv1350.integration.PurchaseItemDTO;
-import se.kth.iv1350.integration.ItemIdentifier;
+import se.kth.iv1350.integration.ItemDatabaseControls;
 import se.kth.iv1350.model.PurchaseDTO;
 
 /**
@@ -45,7 +45,7 @@ public class Controller {
 	    if (quantity < 1)
 	        throw new Exception("Invalid quantity of " + quantity
             + " entered");
-			PurchaseItemDTO scannedItem = ItemIdentifier.scanItem(id);
+			PurchaseItemDTO scannedItem = ItemDatabaseControls.scanItem(id);
 			if (scannedItem == null)
 			    throw new Exception("Item with the ID: " + id +
                         " does not exist.");

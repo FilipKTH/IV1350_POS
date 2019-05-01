@@ -38,7 +38,7 @@ class CashRegisterTest {
             fail("Sum was invalid, exception should have been thrown");
         }
         catch (Exception e){
-            assertTrue(e.getMessage().contains("Tried"), "Wrong exception thrown, exception: " +
+            assertTrue(e.getMessage().contains("less"), "Wrong exception thrown, exception: " +
                     e.getMessage());
         }
     }
