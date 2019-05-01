@@ -21,7 +21,9 @@ public class CashRegister {
 	 * Adds money to the balance of the cash register.
 	 * @param amountToAdd Money to add to the balance
 	 */
-	public void addMoney(double amountToAdd) {
+	public void addMoney(double amountToAdd) throws Exception{
+		if(amountToAdd < 1)
+			throw new Exception(amountToAdd + " is an invalid amount");
 		balance += amountToAdd;
 	}
 
@@ -31,8 +33,26 @@ public class CashRegister {
 	 * @param runningTotal Cost of what is being purchased
 	 * @return Returns the change
 	 */
-	public double getChange(double amount, double runningTotal) {
-		return amount - runningTotal;
+	public double getChange(double amount, double runningTotal) throws Exception{
+		if(amount < runningTotal){
+			throw new Exception("Tried to pay less than cost.");
+		}
+		else if((amount - runningTotal) > balance){
+			throw new Exception("Not enough money in register to give change.");
+		}
+
+		double change = amount - runningTotal;
+		balance -= change;
+
+		return change;
+	}
+
+	/***
+	 *
+	 * @return Returns the balance
+	 */
+	public double getBalance(){
+		return this.balance;
 	}
 
 }

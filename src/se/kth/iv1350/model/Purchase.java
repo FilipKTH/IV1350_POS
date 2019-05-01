@@ -66,7 +66,7 @@ public class Purchase {
      * @param amount The amount the customer is paying
      * @return Returns the change of the purchase
      */
-	public double pay(double amount) {
+	public double pay(double amount) throws Exception{
 	    cashRegister.addMoney(amount);
 		createAndPrintReceipt();
 		updateEAS();
