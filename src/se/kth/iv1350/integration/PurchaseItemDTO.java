@@ -22,7 +22,7 @@ public class PurchaseItemDTO {
 	 * @param itemID Sets itemID of items
 	 * @param itemDescription Sets item description of item
 	 */
-	public PurchaseItemDTO(double price, double vat, int amount, String itemID, String itemDescription) {
+	PurchaseItemDTO(double price, double vat, int amount, String itemID, String itemDescription) {
 		this.price = price;
 		this.vat = vat;
 		this.amount = amount;
