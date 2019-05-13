@@ -41,13 +41,13 @@ public class Controller {
      * @param quantity Specifies the quantity of items to purchase
      * @return Returns matching object from database
      */
-	public PurchaseItemDTO scanItem(String id, int quantity) throws Exception{
+	public PurchaseItemDTO scanItem(String id, int quantity) throws OperationFailedException{
 	    if (quantity < 1)
-	        throw new Exception("Invalid quantity of " + quantity
+	        throw new OperationFailedException("Invalid quantity of " + quantity
             + " entered");
 			PurchaseItemDTO scannedItem = ItemDatabaseControls.scanItem(id);
 			if (scannedItem == null)
-			    throw new Exception("Item with the ID: " + id +
+			    throw new OperationFailedException("Item with the ID: " + id +
                         " does not exist.");
 
 			scannedItem.setAmount(quantity);

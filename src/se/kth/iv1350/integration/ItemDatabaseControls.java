@@ -13,11 +13,16 @@ public class ItemDatabaseControls {
 	 * Finds item based on its id in the inventory database
 	 * @param itemID Id to find in database
 	 * @return Returns the matching item from the database
+	 * @throws NoMatchingIDException	If there is no item
+	 * 								 	in the database
+	 * 								 	matching the itemID.
 	 */
-	public static PurchaseItemDTO scanItem(String itemID) {
+	public static PurchaseItemDTO scanItem(String itemID)
+			throws NoMatchingIDException{
 		if (itemID == null)
 			return null;
 		createItemsForDatabase();
+
 		return returnItemFromDatabase(itemID);
 	}
 
@@ -31,11 +36,12 @@ public class ItemDatabaseControls {
 		database[4] = new PurchaseItemDTO(32,5,1,"bed","This is a bed");
 	}
 
-	private static PurchaseItemDTO returnItemFromDatabase(String itemID){
+	private static PurchaseItemDTO returnItemFromDatabase(String itemID)
+			throws NoMatchingIDException{
 		for (int i = 0; i < NR_OF_ITEMS; i++)
 			if (itemID.equals(database[i].getItemID()))
 				return database[i];
-		return null;
+		throw new NoMatchingIDException(itemID);
 	}
 
 }
