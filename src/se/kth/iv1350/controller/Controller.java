@@ -72,7 +72,8 @@ public class Controller {
 	        throw new Exception("Invalid quantity of " + quantity
             + " entered");
 	    	try {
-				PurchaseItemDTO scannedItem = ItemDatabaseControls.scanItem(id);
+	    	    ItemDatabaseControls itemDatabaseControls = ItemDatabaseControls.getSingleton();
+				PurchaseItemDTO scannedItem = itemDatabaseControls.scanItem(id);
 				if (scannedItem == null)
 					throw new Exception("Item with the ID: " + id +
 							" does not exist.");
