@@ -1,5 +1,6 @@
 package se.kth.iv1350.controller;
 
+import se.kth.iv1350.integration.NoMatchingIDException;
 import se.kth.iv1350.model.Purchase;
 import se.kth.iv1350.model.CashRegister;
 import se.kth.iv1350.integration.PurchaseItemDTO;
@@ -40,18 +41,26 @@ public class Controller {
      * @param id Used to identify item to purchase
      * @param quantity Specifies the quantity of items to purchase
      * @return Returns matching object from database
+	 * @throws OperationFailedException	If the item ID wasn't found
+	 * 									in the database.
+	 * @throws Exception	Not apart of the seminar.
      */
-	public PurchaseItemDTO scanItem(String id, int quantity) throws OperationFailedException{
+	public PurchaseItemDTO scanItem(String id, int quantity) throws OperationFailedException, Exception{
 	    if (quantity < 1)
-	        throw new OperationFailedException("Invalid quantity of " + quantity
+	        throw new Exception("Invalid quantity of " + quantity
             + " entered");
-			PurchaseItemDTO scannedItem = ItemDatabaseControls.scanItem(id);
-			if (scannedItem == null)
-			    throw new OperationFailedException("Item with the ID: " + id +
-                        " does not exist.");
+	    	try {
+				PurchaseItemDTO scannedItem = ItemDatabaseControls.scanItem(id);
+				if (scannedItem == null)
+					throw new Exception("Item with the ID: " + id +
+							" does not exist.");
 
-			scannedItem.setAmount(quantity);
-			return purchase.addItemToPurchase(scannedItem);
+				scannedItem.setAmount(quantity);
+				return purchase.addItemToPurchase(scannedItem);
+			}
+	    	catch (NoMatchingIDException exc){
+	    		throw new OperationFailedException("Item ID could not be found",exc);
+			}
 	}
 
 	/***

@@ -11,7 +11,18 @@ public class NoMatchingIDException extends Exception {
      * database
      * @param itemID Item ID with no match
      */
+    String itemID;
     public NoMatchingIDException(String itemID){
         super(itemID + " could not be found in the database.");
+        this.itemID = itemID;
+    }
+
+    /**
+     *
+     * @return Returns the item ID causing the
+     * exception
+     */
+    public String getNotFoundItemID() {
+        return itemID;
     }
 }

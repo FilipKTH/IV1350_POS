@@ -13,7 +13,7 @@ class ItemDatabaseControlsTest {
         */
 
     @Test
-    void scanExistingItem() {
+    void scanExistingItem() throws NoMatchingIDException{
         //Test 1
         String result1 = ItemDatabaseControls.scanItem("apple").getItemID();
         String expResult1 = "apple";
@@ -24,7 +24,7 @@ class ItemDatabaseControlsTest {
     }
 
     @Test
-    void scanNoneExistingITem(){
+    void scanNoneExistingITem() throws NoMatchingIDException{
         //Test 2
         PurchaseItemDTO result2 = ItemDatabaseControls.scanItem("cowboy");
         //Result of test 2
@@ -32,7 +32,7 @@ class ItemDatabaseControlsTest {
     }
 
     @Test
-    void scanNullID(){
+    void scanNullID() throws NoMatchingIDException{
         //Test 3
         PurchaseItemDTO result3 = ItemDatabaseControls.scanItem(null);
         //Result of test 3
