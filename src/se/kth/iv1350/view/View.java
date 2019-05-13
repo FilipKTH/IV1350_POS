@@ -1,6 +1,7 @@
 package se.kth.iv1350.view;
 
 import se.kth.iv1350.controller.Controller;
+import se.kth.iv1350.controller.OperationFailedException;
 import se.kth.iv1350.integration.PurchaseItemDTO;
 
 /**
@@ -34,26 +35,30 @@ public class View {
             pay();
     }
 
-    void scanItems() throws Exception{
+    void scanItems()throws Exception{
         System.out.println("Availible items: apple, food, desk, pasta and bed");
         String input = in.nextLine();
         int amount;
         while (!input.equals("done")){
             amount = in.nextInt();
 
-            PurchaseItemDTO item = cntrl.scanItem(input, amount);
-            if (item.getAmount() != amount){
-                runningTotal += (item.getAmount() - amount) * item.getPrice();
-                VAT += (item.getAmount() - amount) * item.getVAT();
+            try {
+                PurchaseItemDTO item = cntrl.scanItem(input, amount);
+                if (item.getAmount() != amount) {
+                    runningTotal += (item.getAmount() - amount) * item.getPrice();
+                    VAT += (item.getAmount() - amount) * item.getVAT();
+                } else {
+                    runningTotal += item.getAmount() * item.getPrice();
+                    VAT += item.getAmount() * item.getVAT();
+                }
+                displayInfo(item);
             }
-            else {
-                runningTotal += item.getAmount() * item.getPrice();
-                VAT += item.getAmount() * item.getVAT();
+            catch (OperationFailedException exc){
+                System.out.println("Try scanning again, or contact the manager.");
             }
-            displayInfo(item);
+                in.nextLine();
+                input = in.nextLine();
 
-            in.nextLine();
-            input = in.nextLine();
         }
     }
 

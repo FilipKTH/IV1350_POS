@@ -16,6 +16,7 @@ public class Controller {
 
 	private Purchase purchase;
 	private CashRegister cashRegister;
+	private ErrorMessageControls errorWriter;
 
 
 	/***
@@ -25,6 +26,7 @@ public class Controller {
 	{
 		cashRegister = new CashRegister(200); // Placeholder value of balance
 		purchase = new Purchase(cashRegister);
+		errorWriter = new ErrorMessageControls();
 	}
 	
 	/***
@@ -59,7 +61,10 @@ public class Controller {
 				return purchase.addItemToPurchase(scannedItem);
 			}
 	    	catch (NoMatchingIDException exc){
+				errorWriter.showErrorMessage("Could not find the id \"" + id +
+						"\" in the database.");
 	    		throw new OperationFailedException("Item ID could not be found",exc);
+
 			}
 	}
 
