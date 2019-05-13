@@ -24,18 +24,21 @@ class ItemDatabaseControlsTest {
     }
 
     @Test
-    void scanNoneExistingITem() throws NoMatchingIDException{
-        //Test 2
-        PurchaseItemDTO result2 = ItemDatabaseControls.scanItem("cowboy");
-        //Result of test 2
-        assertNull(result2, "scanItem() wasn't able to handle none existing ID");
-    }
-
-    @Test
     void scanNullID() throws NoMatchingIDException{
         //Test 3
         PurchaseItemDTO result3 = ItemDatabaseControls.scanItem(null);
         //Result of test 3
         assertNull(result3, "scanItem() wasn't able to handle null parameter");
+    }
+
+    @Test
+    void testNoMatchingIDException(){
+        try {
+            PurchaseItemDTO result1 = ItemDatabaseControls.scanItem("dead pig");
+            fail("NoMatchingIDException should have been thrown");
+        }
+        catch (NoMatchingIDException exc){
+            assertTrue(exc.getMessage().contains("dead pig"), "Message not displaying correct.");
+        }
     }
 }

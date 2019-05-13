@@ -26,7 +26,6 @@ public class FileLogger implements ExceptionLoggerInterface{
         errorLogMsg.append(exc.getMessage());
         logFile.println(errorLogMsg);
         exc.printStackTrace(logFile);
-
     }
 
     private String createTime(){
