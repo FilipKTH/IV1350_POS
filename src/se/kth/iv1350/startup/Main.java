@@ -1,5 +1,6 @@
 package se.kth.iv1350.startup;
 
+import se.kth.iv1350.view.TotalRevenueView;
 import se.kth.iv1350.view.View;
 import se.kth.iv1350.controller.Controller;
 
@@ -16,8 +17,8 @@ public class Main {
 	public static void main(String[] args) throws Exception{
 		View view;
 		Controller controller;
-
 		controller = new Controller();
+		controller.addObserver(new TotalRevenueView());
 		view = new View(controller);
 		view.run();
 	}

@@ -24,16 +24,11 @@ class ControllerTest {
     }*/
 
     @Test
-    void scanningExistingItem() {
-        try {
+    void scanningExistingItem() throws Exception{
             PurchaseItemDTO result = instance.scanItem("apple", 1);
             String expResult = "apple";
             assertEquals(expResult, result.getItemID(), "Object wasn't successfully returned");
             assertTrue(result.getAmount() == 1, "Amount wasn't successfully updated");
-        }
-        catch (Exception e){
-            fail("Exception message: " + e.getMessage());
-        }
     }
 
     @Test

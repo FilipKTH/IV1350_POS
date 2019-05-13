@@ -7,6 +7,7 @@ import se.kth.iv1350.model.CashRegister;
 import se.kth.iv1350.integration.PurchaseItemDTO;
 import se.kth.iv1350.integration.ItemDatabaseControls;
 import se.kth.iv1350.model.PurchaseDTO;
+import se.kth.iv1350.model.PurchaseObserverInterface;
 
 import javax.imageio.IIOException;
 import java.io.IOException;
@@ -46,6 +47,14 @@ public class Controller {
 	 */
 	public void startNewAPurchase() {
 		purchase = new Purchase(cashRegister);
+	}
+
+	/**
+	 * Adds observer to <code>Purchase</code>
+	 * @param purchaseObserver Observer added to <code>Purchase</code>
+	 */
+	public void addObserver(PurchaseObserverInterface purchaseObserver){
+		purchase.addObserver(purchaseObserver);
 	}
 
     /***

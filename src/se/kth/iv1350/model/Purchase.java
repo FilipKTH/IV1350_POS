@@ -16,7 +16,9 @@ import java.util.List;
 public class Purchase {
 	private List<PurchaseItemDTO> listOfItemsToPurchase = new ArrayList<>();
 	private CashRegister cashRegister;
-
+	private PurchaseObserverInterface purchaseObserver; // Could have used a list here
+														// but we know only one observer
+														// will be used in this case.
 	private double runningTotal;
 	private double totalVAT;
 
@@ -29,6 +31,14 @@ public class Purchase {
         this.cashRegister = cashRegister;
         this.runningTotal = 0;
         this.totalVAT = 0;
+	}
+
+	/**
+	 * Used to add observer to <code>Purchase</code>
+	 * @param purchaseObserver The observer added
+	 */
+	public void addObserver(PurchaseObserverInterface purchaseObserver){
+		this.purchaseObserver = purchaseObserver;
 	}
 
 	/***
@@ -126,5 +136,6 @@ public class Purchase {
 
 	private void addItemToRunningTotal(PurchaseItemDTO purchaseItemDTO){
 		runningTotal += purchaseItemDTO.getPrice() * purchaseItemDTO.getAmount();
+		purchaseObserver.runningTotalUpdated(runningTotal);
 	}
 }
