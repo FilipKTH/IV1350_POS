@@ -1,11 +1,15 @@
 package se.kth.iv1350.controller;
 
 import se.kth.iv1350.integration.NoMatchingIDException;
+import se.kth.iv1350.logger.FileLogger;
 import se.kth.iv1350.model.Purchase;
 import se.kth.iv1350.model.CashRegister;
 import se.kth.iv1350.integration.PurchaseItemDTO;
 import se.kth.iv1350.integration.ItemDatabaseControls;
 import se.kth.iv1350.model.PurchaseDTO;
+
+import javax.imageio.IIOException;
+import java.io.IOException;
 
 /**
  * @author Filip
@@ -17,6 +21,7 @@ public class Controller {
 	private Purchase purchase;
 	private CashRegister cashRegister;
 	private ErrorMessageControls errorWriter;
+	private FileLogger fileLogger;
 
 
 	/***
@@ -27,6 +32,12 @@ public class Controller {
 		cashRegister = new CashRegister(200); // Placeholder value of balance
 		purchase = new Purchase(cashRegister);
 		errorWriter = new ErrorMessageControls();
+		try {
+            fileLogger = new FileLogger();
+        }
+		catch (IOException exc){
+		    System.out.println("Can't log...");
+        }
 	}
 	
 	/***
@@ -63,6 +74,7 @@ public class Controller {
 	    	catch (NoMatchingIDException exc){
 				errorWriter.showErrorMessage("Could not find the id \"" + id +
 						"\" in the database.");
+				fileLogger.log(exc);
 	    		throw new OperationFailedException("Item ID could not be found",exc);
 
 			}
