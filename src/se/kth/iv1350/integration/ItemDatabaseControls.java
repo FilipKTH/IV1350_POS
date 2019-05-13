@@ -7,8 +7,16 @@ package se.kth.iv1350.integration;
 public class ItemDatabaseControls {
 	//only used for testing and simulating database
 	final static int NR_OF_ITEMS = 5;
+	private static final ItemDatabaseControls itemDataBaseControls = new ItemDatabaseControls();
 	private static PurchaseItemDTO[] database;
 
+	private ItemDatabaseControls(){
+
+	}
+
+	public static ItemDatabaseControls getSingleton(){
+		return itemDataBaseControls;
+	}
 	/***
 	 * Finds item based on its id in the inventory database
 	 * @param itemID Id to find in database
@@ -17,7 +25,7 @@ public class ItemDatabaseControls {
 	 * 								 	in the database
 	 * 								 	matching the itemID.
 	 */
-	public static PurchaseItemDTO scanItem(String itemID)
+	public PurchaseItemDTO scanItem(String itemID)
 			throws NoMatchingIDException{
 		if (itemID == null)
 			return null;
@@ -27,7 +35,7 @@ public class ItemDatabaseControls {
 	}
 
 	//only used for testing purposes
-	private static void createItemsForDatabase(){
+	private void createItemsForDatabase(){
 		database = new PurchaseItemDTO[NR_OF_ITEMS];
 		database[0] = new PurchaseItemDTO(10,2,1,"apple","This is an apple");
 		database[1] = new PurchaseItemDTO(5,1,1,"food","This is food");
@@ -36,7 +44,7 @@ public class ItemDatabaseControls {
 		database[4] = new PurchaseItemDTO(32,5,1,"bed","This is a bed");
 	}
 
-	private static PurchaseItemDTO returnItemFromDatabase(String itemID)
+	private PurchaseItemDTO returnItemFromDatabase(String itemID)
 			throws NoMatchingIDException{
 		for (int i = 0; i < NR_OF_ITEMS; i++)
 			if (itemID.equals(database[i].getItemID()))

@@ -16,13 +16,13 @@ public class FileLogger implements ExceptionLoggerInterface{
     private PrintWriter logFile;
 
     public FileLogger() throws IOException {
-        logFile = new PrintWriter(new FileWriter(LOG_FILE_NAME));
+        logFile = new PrintWriter(new FileWriter(LOG_FILE_NAME),true);
     }
     @Override
     public void log(Exception exc) {
         StringBuilder errorLogMsg = new StringBuilder();
         errorLogMsg.append(createTime());
-        errorLogMsg.append(", An exception was thrown:\n");
+        errorLogMsg.append(", An exception was thrown:\r\n");
         errorLogMsg.append(exc.getMessage());
         logFile.println(errorLogMsg);
         exc.printStackTrace(logFile);
