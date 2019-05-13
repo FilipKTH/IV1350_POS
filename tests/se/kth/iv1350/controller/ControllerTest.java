@@ -3,6 +3,7 @@ package se.kth.iv1350.controller;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import se.kth.iv1350.integration.NoMatchingIDException;
 import se.kth.iv1350.integration.PurchaseItemDTO;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -65,14 +66,14 @@ class ControllerTest {
     }
 
     @Test
-    void scanningNonExistingItemID(){
+    void scanningNonExistingItemID() throws Exception{
         try{
             PurchaseItemDTO result = instance.scanItem("wild cowboy", 2);
             fail("Due to the item being null an exception should have ben thrown");
         }
-        catch (Exception e){
-            assertTrue(e.getMessage().contains("ID"),"Wrong exception tossed," +
-                    " tossed exception: " + e.getMessage());
+        catch (OperationFailedException exc){
+            assertTrue(exc.getMessage().contains("ID"),"Wrong exception tossed," +
+                    " tossed exception: " + exc.getMessage());
         }
     }
 
