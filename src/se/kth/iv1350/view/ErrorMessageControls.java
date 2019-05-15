@@ -1,4 +1,4 @@
-package se.kth.iv1350.controller;
+package se.kth.iv1350.view;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -8,7 +8,15 @@ import java.time.format.FormatStyle;
  * Controls the error messages shown
  * to the user.
  */
-public class ErrorMessageControls {
+class ErrorMessageControls {
+    private final static ErrorMessageControls singleton = new ErrorMessageControls();
+
+    private ErrorMessageControls(){}
+
+    static ErrorMessageControls getSingleton(){
+        return singleton;
+    }
+
     void showErrorMessage(String msg){
         StringBuilder errorMsgBuilder = new StringBuilder();
         errorMsgBuilder.append(createTime());

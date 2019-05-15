@@ -14,6 +14,10 @@ public class ItemDatabaseControls {
 
 	}
 
+	/**
+	 * @return Returns the only instance of
+	 * <code>ItemDataBaseControls</code>
+	 */
 	public static ItemDatabaseControls getSingleton(){
 		return itemDataBaseControls;
 	}

@@ -24,7 +24,7 @@ class PurchaseTest {
     @Test
     void addingExistingItem() {
         try {
-            purchase.addItemToPurchase(ItemDatabaseControls.scanItem("apple"));
+            purchase.addItemToPurchase(ItemDatabaseControls.getSingleton().scanItem("apple"));
             assertTrue(purchase.getItemsToPurchase()[0].getItemID().equals("apple"),
                     "Wasn't able to correctly add item");
         }
@@ -50,8 +50,8 @@ class PurchaseTest {
     @Test
     void addingSameItem(){
         try {
-            purchase.addItemToPurchase(ItemDatabaseControls.scanItem("apple"));
-            purchase.addItemToPurchase(ItemDatabaseControls.scanItem("apple"));
+            purchase.addItemToPurchase(ItemDatabaseControls.getSingleton().scanItem("apple"));
+            purchase.addItemToPurchase(ItemDatabaseControls.getSingleton().scanItem("apple"));
             assertTrue(purchase.getItemsToPurchase()[0].getAmount() == 2,
                     "Amount wasn't updated as intended");
             assertTrue(purchase.getItemsToPurchase().length == 1,
@@ -67,7 +67,7 @@ class PurchaseTest {
     @Test
     void addingItemWithBiggerQuantity(){
         try {
-            PurchaseItemDTO item = ItemDatabaseControls.scanItem("apple");
+            PurchaseItemDTO item = ItemDatabaseControls.getSingleton().scanItem("apple");
             item.setAmount(5);
             purchase.addItemToPurchase(item);
             assertTrue(purchase.getItemsToPurchase()[0].getAmount() == 5,
@@ -81,8 +81,8 @@ class PurchaseTest {
     @Test
     void payTooMuch() {
         try {
-            purchase.addItemToPurchase(ItemDatabaseControls.scanItem("apple"));
-            purchase.addItemToPurchase(ItemDatabaseControls.scanItem("apple"));
+            purchase.addItemToPurchase(ItemDatabaseControls.getSingleton().scanItem("apple"));
+            purchase.addItemToPurchase(ItemDatabaseControls.getSingleton().scanItem("apple"));
 
             double result = purchase.pay(30);
             double expResult = 10;
@@ -97,8 +97,8 @@ class PurchaseTest {
     @Test
     void payEven() {
         try {
-            purchase.addItemToPurchase(ItemDatabaseControls.scanItem("apple"));
-            purchase.addItemToPurchase(ItemDatabaseControls.scanItem("apple"));
+            purchase.addItemToPurchase(ItemDatabaseControls.getSingleton().scanItem("apple"));
+            purchase.addItemToPurchase(ItemDatabaseControls.getSingleton().scanItem("apple"));
 
             double result = purchase.pay(20);
             double expResult = 0;
@@ -113,8 +113,8 @@ class PurchaseTest {
     @Test
     void payTooLittle() {
         try {
-            purchase.addItemToPurchase(ItemDatabaseControls.scanItem("apple"));
-            purchase.addItemToPurchase(ItemDatabaseControls.scanItem("apple"));
+            purchase.addItemToPurchase(ItemDatabaseControls.getSingleton().scanItem("apple"));
+            purchase.addItemToPurchase(ItemDatabaseControls.getSingleton().scanItem("apple"));
 
             double result = purchase.pay(10);
             fail("Exception should have been tossed");

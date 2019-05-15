@@ -5,7 +5,17 @@ package se.kth.iv1350.integration;
  * @author Filip
  */
 public class CustomerDatabaseControls {
-	static CustomerDTO findCustomerByID(String customerID) {
+	private static final CustomerDatabaseControls singleton = new CustomerDatabaseControls();
+
+	/**
+	 * @return Returns the only instance of
+	 * <code>CustomerDatabaseControls</code>
+	 */
+	static CustomerDatabaseControls getSingleton(){
+		return singleton;
+	}
+
+	CustomerDTO findCustomerByID(String customerID) {
 		return null;
 	}
 

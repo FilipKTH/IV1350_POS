@@ -2,8 +2,6 @@ package se.kth.iv1350.model;
 
 import se.kth.iv1350.integration.*;
 
-import se.kth.iv1350.model.Recipt;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -102,29 +100,29 @@ public class Purchase {
      *                   customerID i used to identify.
      * @return Returns updated purchase
      */
-	public PurchaseDTO findDiscounts(String customerID) {
-	    DiscountDTO[] availableDiscounts = DiscountGenerator.getDiscounts(customerID,
-                listOfItemsToPurchase);
+	public PurchaseDTO findAndApplyDiscounts(String customerID) {
+	    DiscountDTO availableDiscounts = DiscountFactory.getSingleton().getDiscount(customerID,
+                getPurchaseDTO());
 	    applyDiscounts(availableDiscounts);
 		return getPurchaseDTO();
 	}
 
-	private void applyDiscounts(DiscountDTO[] discounts) {
-		for (DiscountDTO discount : discounts) runningTotal -= discount.getDiscountInMoney();
+	private void applyDiscounts(DiscountDTO discount) {
+		runningTotal -= discount.getDiscountInMoney();
 	}
 
 	private void createAndPrintReceipt() {
 		Recipt recipt = new Recipt(getPurchaseDTO());
-		ReceiptPrinter.printReceipt(recipt);
+		ReceiptPrinter.getSingleton().printReceipt(recipt);
 
 	}
 
 	private void updateEAS() {
-		EAScontrols.logPurchase(getPurchaseDTO());
+		EAScontrols.getSingleton().logPurchase(getPurchaseDTO());
 	}
 
 	private void updateInventory() {
-		InventoryControls.updateInventory(listOfItemsToPurchase);
+		InventoryControls.getSingleton().updateInventory(listOfItemsToPurchase);
 	}
 
 	private PurchaseItemDTO findAndReturnPurchaseItemDTOFromPurchaseList(String itemID){

@@ -11,9 +11,9 @@ import se.kth.iv1350.integration.PurchaseItemDTO;
  * a real view.
  */
 public class View {
-    java.util.Scanner in;   //For testing, not part of the actual program
-    double runningTotal;    //For testing, not part of the actual program
-    double VAT;             //For testing, not part of the actual program
+    private java.util.Scanner in;   //For testing, not part of the actual program
+    private double runningTotal;    //For testing, not part of the actual program
+    private double VAT;             //For testing, not part of the actual program
 
     private Controller cntrl;
 
@@ -35,7 +35,7 @@ public class View {
             pay();
     }
 
-    void scanItems()throws Exception{
+    private void scanItems()throws Exception{
         System.out.println("Availible items: apple, food, desk, pasta and bed");
         String input = in.nextLine();
         int amount;
@@ -54,7 +54,8 @@ public class View {
                 displayInfo(item);
             }
             catch (OperationFailedException exc){
-                System.out.println("Try scanning again, or contact the manager.");
+                ErrorMessageControls.getSingleton().showErrorMessage(
+                        "Could not scan the item.");
             }
                 in.nextLine();
                 input = in.nextLine();
@@ -62,7 +63,7 @@ public class View {
         }
     }
 
-    void displayInfo(PurchaseItemDTO item){
+    private void displayInfo(PurchaseItemDTO item){
         System.out.println("Total: " + runningTotal);
         System.out.println(item.getItemDescription());
         System.out.println("Quantity; " + item.getAmount());
@@ -70,7 +71,7 @@ public class View {
                 " per " + item.getItemID());
     }
 
-    void pay() throws Exception{
+    private void pay() throws Exception{
         System.out.println("Total: " + runningTotal + " VAT; " + VAT);
         System.out.println("Pay:");
         System.out.println("Change: " + cntrl.pay(in.nextDouble()));

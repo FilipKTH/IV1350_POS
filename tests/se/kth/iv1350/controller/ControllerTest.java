@@ -61,7 +61,7 @@ class ControllerTest {
     }
 
     @Test
-    void scanningNonExistingItemID() throws Exception{
+    void scanningNonExistingItemIDNoMatchingIDException() throws Exception{
         try{
             PurchaseItemDTO result = instance.scanItem("wild cowboy", 2);
             fail("Due to the item being null an exception should have ben thrown");

@@ -9,7 +9,6 @@ import se.kth.iv1350.integration.ItemDatabaseControls;
 import se.kth.iv1350.model.PurchaseDTO;
 import se.kth.iv1350.model.PurchaseObserverInterface;
 
-import javax.imageio.IIOException;
 import java.io.IOException;
 
 /**
@@ -21,7 +20,6 @@ public class Controller {
 
 	private Purchase purchase;
 	private CashRegister cashRegister;
-	private ErrorMessageControls errorWriter;
 	private FileLogger fileLogger;
 
 
@@ -32,7 +30,7 @@ public class Controller {
 	{
 		cashRegister = new CashRegister(200); // Placeholder value of balance
 		purchase = new Purchase(cashRegister);
-		errorWriter = new ErrorMessageControls();
+
 		try {
             fileLogger = new FileLogger();
         }
@@ -72,18 +70,11 @@ public class Controller {
 	        throw new Exception("Invalid quantity of " + quantity
             + " entered");
 	    	try {
-	    	    ItemDatabaseControls itemDatabaseControls = ItemDatabaseControls.getSingleton();
-				PurchaseItemDTO scannedItem = itemDatabaseControls.scanItem(id);
-				if (scannedItem == null)
-					throw new Exception("Item with the ID: " + id +
-							" does not exist.");
-
+				PurchaseItemDTO scannedItem = ItemDatabaseControls.getSingleton().scanItem(id);
 				scannedItem.setAmount(quantity);
 				return purchase.addItemToPurchase(scannedItem);
 			}
 	    	catch (NoMatchingIDException exc){
-				errorWriter.showErrorMessage("Could not find the id \"" + id +
-						"\" in the database.");
 				fileLogger.log(exc);
 	    		throw new OperationFailedException("Item ID could not be found",exc);
 
@@ -97,7 +88,7 @@ public class Controller {
 	 * @return Returns the updated purchase.
 	 */
 	public PurchaseDTO applyAvailableDiscounts(String customerID) {
-		return purchase.findDiscounts(customerID);
+		return purchase.findAndApplyDiscounts(customerID);
 	}
 
     /***

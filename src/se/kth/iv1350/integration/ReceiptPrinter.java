@@ -7,12 +7,20 @@ import se.kth.iv1350.model.Recipt;
  * the program.
  */
 public class ReceiptPrinter {
+	private static final ReceiptPrinter singleton = new ReceiptPrinter();
 
+	/**
+	 * @return Returns the only instance of
+	 * <code>ReceiptPrinter</code>
+	 */
+	public static ReceiptPrinter getSingleton(){
+		return singleton;
+	}
 	/***
 	 * Prints out receipt to the connected printer
 	 * @param receipt The receipt to print out
 	 */
-	public static void printReceipt(Recipt receipt) {
+	public void printReceipt(Recipt receipt) {
 
 	}
 

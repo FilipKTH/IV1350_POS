@@ -15,7 +15,7 @@ class ItemDatabaseControlsTest {
     @Test
     void scanExistingItem() throws NoMatchingIDException{
         //Test 1
-        String result1 = ItemDatabaseControls.scanItem("apple").getItemID();
+        String result1 = ItemDatabaseControls.getSingleton().scanItem("apple").getItemID();
         String expResult1 = "apple";
 
         //Result of test 1
@@ -26,7 +26,7 @@ class ItemDatabaseControlsTest {
     @Test
     void scanNullID() throws NoMatchingIDException{
         //Test 3
-        PurchaseItemDTO result3 = ItemDatabaseControls.scanItem(null);
+        PurchaseItemDTO result3 = ItemDatabaseControls.getSingleton().scanItem(null);
         //Result of test 3
         assertNull(result3, "scanItem() wasn't able to handle null parameter");
     }
@@ -34,7 +34,7 @@ class ItemDatabaseControlsTest {
     @Test
     void testNoMatchingIDException(){
         try {
-            PurchaseItemDTO result1 = ItemDatabaseControls.scanItem("dead pig");
+            PurchaseItemDTO result1 = ItemDatabaseControls.getSingleton().scanItem("dead pig");
             fail("NoMatchingIDException should have been thrown");
         }
         catch (NoMatchingIDException exc){

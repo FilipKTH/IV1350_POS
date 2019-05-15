@@ -8,6 +8,9 @@ public class DiscountDTO {
 
 	private double discountInMoney;
 
+	DiscountDTO(double discountInMoney){
+		this.discountInMoney = discountInMoney;
+	}
 	/***
 	 *
 	 * @return Returns the amount of money to be discounted.

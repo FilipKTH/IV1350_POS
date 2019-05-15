@@ -2,6 +2,7 @@ package se.kth.iv1350.model;
 
 import se.kth.iv1350.integration.PurchaseItemDTO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,8 +15,12 @@ public class PurchaseDTO {
 
 	private double totalVAT;
 
-	PurchaseDTO(double runningTotal, double totalVat, List<PurchaseItemDTO> itemDTOs) {
+	private List<PurchaseItemDTO> itemDTOs;
 
+	PurchaseDTO(double runningTotal, double totalVat, List<PurchaseItemDTO> itemDTOs) {
+		this.runningTotal = runningTotal;
+		this.totalVAT = totalVat;
+		this.itemDTOs = itemDTOs;
 	}
 
 	/***
@@ -38,8 +43,8 @@ public class PurchaseDTO {
 	 *
 	 * @return Returns information of all items to purchase
 	 */
-	public PurchaseItemDTO[] getItemDTOs() {
-		return null;
+	public List<PurchaseItemDTO> getItemDTOs() {
+		return itemDTOs;
 	}
 
 }
