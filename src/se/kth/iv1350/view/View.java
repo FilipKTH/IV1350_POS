@@ -1,5 +1,6 @@
 package se.kth.iv1350.view;
 
+import se.kth.iv1350.controller.ConnectionIssueException;
 import se.kth.iv1350.controller.Controller;
 import se.kth.iv1350.controller.OperationFailedException;
 import se.kth.iv1350.integration.PurchaseItemDTO;
@@ -56,6 +57,10 @@ public class View {
             catch (OperationFailedException exc){
                 ErrorMessageControls.getSingleton().showErrorMessage(
                         "Could not scan the item.");
+            }
+            catch (ConnectionIssueException exc){
+                ErrorMessageControls.getSingleton().showErrorMessage("Connection" +
+                        " failed, could not scan item.");
             }
                 in.nextLine();
                 input = in.nextLine();

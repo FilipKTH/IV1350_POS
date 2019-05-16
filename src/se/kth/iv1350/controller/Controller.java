@@ -64,6 +64,7 @@ public class Controller {
      * @return Returns matching object from database
 	 * @throws OperationFailedException	If the item ID wasn't found
 	 * 									in the database.
+	 * @throws ConnectionIssueException	If connection to database fails.
 	 * @throws Exception	Not apart of the seminar.
      */
 	public PurchaseItemDTO scanItem(String id, int quantity) throws OperationFailedException, Exception{

@@ -41,4 +41,15 @@ class ItemDatabaseControlsTest {
             assertTrue(exc.getMessage().contains("dead pig"), "Message not displaying correct.");
         }
     }
+
+    @Test
+    void TestDatabaseFailureException() throws NoMatchingIDException{
+        try{
+            PurchaseItemDTO result1 = ItemDatabaseControls.getSingleton().scanItem("fail");
+            fail("DatabaseFailureException should have been thrown");
+        }
+        catch (DatabaseFailureException exc){
+            assertTrue(exc.getMessage().contains("establish"));
+        }
+    }
 }

@@ -64,7 +64,8 @@ class ControllerTest {
     void scanningNonExistingItemIDNoMatchingIDException() throws Exception{
         try{
             PurchaseItemDTO result = instance.scanItem("wild cowboy", 2);
-            fail("Due to the item being null an exception should have ben thrown");
+            fail("Due to the item not" +
+                    " existing an exception should have ben thrown");
         }
         catch (OperationFailedException exc){
             assertTrue(exc.getMessage().contains("ID"),"Wrong exception tossed," +
@@ -83,7 +84,14 @@ class ControllerTest {
         }
     }
 
-    /*@Test
-    void pay() {
-    }*/
+    @Test
+    void connectionIssueException() throws Exception{
+        try {
+            PurchaseItemDTO result = instance.scanItem("fail", 2);
+            fail("ConnectionIssueException should have been tossed.");
+        }
+        catch (ConnectionIssueException exc){
+            assertTrue(exc.getMessage().contains("responding"),"Wrong error message.");
+        }
+    }
 }
