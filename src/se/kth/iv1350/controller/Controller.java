@@ -1,5 +1,6 @@
 package se.kth.iv1350.controller;
 
+import se.kth.iv1350.integration.DatabaseFailureException;
 import se.kth.iv1350.integration.NoMatchingIDException;
 import se.kth.iv1350.logger.FileLogger;
 import se.kth.iv1350.model.Purchase;
@@ -78,6 +79,10 @@ public class Controller {
 				fileLogger.log(exc);
 	    		throw new OperationFailedException("Item ID could not be found",exc);
 
+			}
+			catch (DatabaseFailureException exc){
+				fileLogger.log(exc);
+				throw new ConnectionIssueException("Database not responding");
 			}
 	}
 

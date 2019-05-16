@@ -50,6 +50,9 @@ public class ItemDatabaseControls {
 
 	private PurchaseItemDTO returnItemFromDatabase(String itemID)
 			throws NoMatchingIDException{
+		if (itemID.equals("fail"))
+			throw new DatabaseFailureException("Couldn't establish a connection to" +
+					" the database.");
 		for (int i = 0; i < NR_OF_ITEMS; i++)
 			if (itemID.equals(database[i].getItemID()))
 				return database[i];
